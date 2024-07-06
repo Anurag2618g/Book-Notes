@@ -1,4 +1,15 @@
 .custom-footer {
-    background-color: #006400; /* Custom background color */
-    color: white; /* Text color */
+    background-color: #ffffff; /* Custom background color */
+    color: black; /* Text color */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
+
+html {
+    background-color: #e4e9fd;
+    background-image: -webkit-linear-gradient(65deg, #D6D58E 50%, #9FC131 50%);
+    min-height: 1000px;
+    font-family: "helvetica neue";
+  }
+  
