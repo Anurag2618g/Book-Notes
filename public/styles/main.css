@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-html {
+html, body {
     background-color: #e4e9fd;
     background-image: -webkit-linear-gradient(65deg, #D6D58E 50%, #9FC131 50%);
     min-height: 1000px;

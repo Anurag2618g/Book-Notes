@@ -16,13 +16,37 @@ const db = new pg.Client({
 });
 db.connect();
 
+let books =[];
+
+//Fetch data from database
 app.get("/", async(req,res) => {
-    res.render("index.ejs");
+    res.render("index.ejs", {
+        books: books,
+    });
 });
 
-app.post("/search", async(req,res) => {
+//New route
+app.get("/add-book", (req,res) =>{
     res.render("new.ejs");
 });
+
+//Fetch data from API
+
+//Route for search button
+app.post("/search", (req,res) => {
+    res.redirect("/");
+});
+
+//Save book
+app.post("/save-book", (req,res) => {
+
+    res.redirect("/");
+});
+
+//Edit review
+
+//Delete book
+
 
 app.listen(port, async() => {
     console.log(`Server running on port ${port}`);
