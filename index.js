@@ -16,7 +16,13 @@ const db = new pg.Client({
 });
 db.connect();
 
-let books =[];
+let books =[{
+    name: "Think and Grow Rich: Instant Motivator: Instant Motivator",
+    cover_id: "193242914X",
+    author: "by Napoleon Hill",
+}];
+
+//Fetch data from API
 
 //Fetch data from database
 app.get("/", async(req,res) => {
@@ -30,16 +36,14 @@ app.get("/add-book", (req,res) =>{
     res.render("new.ejs");
 });
 
-//Fetch data from API
-
-//Route for search button
-app.post("/search", (req,res) => {
+//Save book
+app.post("/save-book", (req,res) => {
+    //send data to postgres
     res.redirect("/");
 });
 
-//Save book
-app.post("/save-book", (req,res) => {
-
+//Route for search button
+app.post("/search", (req,res) => {
     res.redirect("/");
 });
 

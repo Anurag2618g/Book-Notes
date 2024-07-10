@@ -1,15 +1,26 @@
 .custom-footer {
-    background-color: #ffffff; /* Custom background color */
+    background-color: #e5e5ca; /* Custom background color */
     color: black; /* Text color */
     position: fixed;
     bottom: 0;
     width: 100%;
 }
 
+.bg-gray-300 {
+    background-color: #e3e7da; /* Lighter gray */
+}
+
 html, body {
-    background-color: #e4e9fd;
+    background-color: #cdccbc;
     background-image: -webkit-linear-gradient(65deg, #D6D58E 50%, #9FC131 50%);
     min-height: 1000px;
     font-family: "helvetica neue";
+  }
+
+.book-cover {
+    max-height: 100%;
+    height: auto;
+    min-height: 400px; /* Ensures a minimum height of 400px */
+    object-fit: cover; /* Ensures the image covers the container */
   }
   
