@@ -16,34 +16,38 @@ const db = new pg.Client({
 });
 db.connect();
 
-let books =[{
-    name: "Think and Grow Rich: Instant Motivator: Instant Motivator",
-    cover_id: "193242914X",
-    author: "by Napoleon Hill",
-}];
-
-//Fetch data from API
+let books =[];
 
 //Fetch data from database
 app.get("/", async(req,res) => {
+    const data = await db.query(
+        "SELECT books.name, books.author, books.cover_id, book_reviews.rating, book_reviews.review_text, book_reviews.review_date FROM books JOIN book_reviews ON books.book_id = book_reviews.book_id"
+        );
+    books = data.rows;
+    console.log(books);
     res.render("index.ejs", {
         books: books,
     });
 });
 
 //New route
-app.get("/add-book", (req,res) =>{
+app.get("/add-book", async(req,res) =>{
     res.render("new.ejs");
 });
 
 //Save book
-app.post("/save-book", (req,res) => {
-    //send data to postgres
-    res.redirect("/");
+app.post("/save-book", async(req,res) => {
+    const { name, author, coverId } = req.body;
+    try {
+        const data = await db.query('INSERT INTO books (name, author, cover_id) VALUES ($1, $2, $3)',[name, author, coverId] );
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).json({ error: 'Error saving book data' });
+    }
 });
 
 //Route for search button
-app.post("/search", (req,res) => {
+app.post("/search", async(req,res) => {
     res.redirect("/");
 });
 
