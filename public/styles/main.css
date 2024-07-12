@@ -48,3 +48,24 @@ html, body {
   .star-rating input[type="radio"]:checked ~ label {
     color: #f2b600;
   }
+
+/* Custom CSS for sort dropdown */
+  .sort-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust gap between elements */
+  }
+
+  .sort-form label {
+    margin-bottom: 0; /* Adjust margin if necessary */
+    font-size: 14px; /* Adjust font size as needed */
+  }
+
+  .sort-form select {
+    width: auto; /* Adjust width as needed */
+    font-size: 14px; /* Adjust font size as needed */
+  }
+
+  .sort-form button {
+    font-size: 14px; /* Adjust font size as needed */
+  }

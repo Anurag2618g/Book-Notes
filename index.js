@@ -21,12 +21,27 @@ db.connect();
 //Fetch saved books from database
 app.get("/", async(req,res) => {
     try{
+        let sortBy = req.query.sort;
+        let sortQuery = "";
+
+        switch (sortBy) {
+            case 'rating':
+                sortQuery = "reviews.rating DESC";
+                break;
+            case 'date':
+                sortQuery = "books.saved_date DESC";
+                break;       
+            default:
+                sortQuery = "books.id";
+                break;
+        }
         const data = await db.query(
-            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id ORDER BY books.id"
+            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id ORDER By " + sortQuery
         );
         const book = data.rows;
         res.render("index.ejs", {
             books: book,
+            sortBy: sortBy,
         });
     }catch (err) {
         console.error(err);
@@ -54,11 +69,6 @@ app.post("/save-book", async(req,res) => {
     } catch (error) {
         res.status(500).json({ error: 'Error saving book data' });
     }
-});
-
-//Search for books through openLibrary
-app.post("/search", async(req,res) => {
-    res.redirect("/");
 });
 
 //Edit Existing books
