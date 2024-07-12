@@ -31,14 +31,23 @@ npm install
 
 ### Update the database connection details in server.js:
 javascript
+
 Copy code
+
 const db = new pg.Client({
+
     user: "postgres",
+
     host: "localhost",
+
     database: "Library",
+
     password: "your-password",
+
     port: 5432,
+
 });
+
 db.connect();
 
 ### Start the server:
