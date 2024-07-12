@@ -29,7 +29,9 @@
                 </p>
                 <p class="card-text"><strong>Saved Date:</strong> <%= book.saved_date.toDateString() %></p>
                 <div class="mt-auto">
-                  <a href="#" class="btn btn-outline-dark btn-sm">Edit</a>
+                  <form action="/edit/<%= book.id %>" method="get" class="d-inline">
+                    <button type="submit" class="btn btn-outline-dark btn-sm ms-2">Edit</button>
+                  </form>
                   <form action="/delete/<%= book.id %>?_method=delete" method="post" class="d-inline">
                     <button type="submit" class="btn btn-outline-danger btn-sm ms-2">Delete</button>
                   </form>

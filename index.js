@@ -22,7 +22,7 @@ db.connect();
 app.get("/", async(req,res) => {
     try{
         const data = await db.query(
-            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id"
+            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id ORDER BY books.id"
         );
         const book = data.rows;
         res.render("index.ejs", {
@@ -62,6 +62,37 @@ app.post("/search", async(req,res) => {
 });
 
 //Edit Existing books
+app.get("/edit/:id", async(req,res) => {
+    const id = req.params.id;
+    try {
+        const data = await db.query(
+            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id WHERE books.id = $1", [id]
+        );
+        const result = data.rows[0];
+        res.render("edit.ejs", {
+            book: result,
+        });
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
+app.patch("/update/:id", async(req,res) => {
+    const id = req.params.id;
+    const {isbn, title, author, review, rating} = req.body;
+    try {
+        await db.query(
+            "UPDATE books SET title = $1, author = $2, isbn = $3 WHERE id = $4", [title,author,isbn,id]
+        );
+        await db.query("UPDATE reviews SET review = $1, rating = $2 WHERE book_id = $3", [review,rating,id]);
+        res.redirect("/");
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+
+});
 
 //Delete books
 app.delete("/delete/:id", async(req,res) => {

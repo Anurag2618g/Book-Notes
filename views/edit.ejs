@@ -1,0 +1,45 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2>Edit Book</h2>
+      <form action="/update/<%= book.id %>?_method=PATCH" method="post">
+        <div class="mb-3">
+          <label for="isbn" class="form-label">ISBN</label>
+          <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book.isbn %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title" value="<%= book.title %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input type="text" class="form-control" id="author" name="author" value="<%= book.author %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="review" class="form-label">Review</label>
+          <textarea class="form-control" id="review" name="review" rows="3" required><%= book.review %></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="rating" class="form-label">Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="5-stars" name="rating" value="5" required />
+            <label for="5-stars" class="star">&#9733;</label>
+            <input type="radio" id="4-stars" name="rating" value="4" />
+            <label for="4-stars" class="star">&#9733;</label>
+            <input type="radio" id="3-stars" name="rating" value="3" />
+            <label for="3-stars" class="star">&#9733;</label>
+            <input type="radio" id="2-stars" name="rating" value="2" />
+            <label for="2-stars" class="star">&#9733;</label>
+            <input type="radio" id="1-stars" name="rating" value="1" />
+            <label for="1-stars" class="star">&#9733;</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
