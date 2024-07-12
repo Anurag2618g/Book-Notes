@@ -1,11 +1,13 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import methodOverride from "method-override";
 
 const app = express();
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 const db = new pg.Client({
     user: "postgres",
@@ -16,44 +18,63 @@ const db = new pg.Client({
 });
 db.connect();
 
-let books =[];
-
-//Fetch data from database
+//Fetch saved books from database
 app.get("/", async(req,res) => {
-    const data = await db.query(
-        "SELECT books.name, books.author, books.cover_id, book_reviews.rating, book_reviews.review_text, book_reviews.review_date FROM books JOIN book_reviews ON books.book_id = book_reviews.book_id"
+    try{
+        const data = await db.query(
+            "SELECT books.*, reviews.book_id, reviews.rating, reviews.review FROM books JOIN reviews ON books.id = reviews.book_id"
         );
-    books = data.rows;
-    console.log(books);
-    res.render("index.ejs", {
-        books: books,
-    });
+        const book = data.rows;
+        res.render("index.ejs", {
+            books: book,
+        });
+    }catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+    
 });
 
-//New route
+//Add new books to the database
 app.get("/add-book", async(req,res) =>{
     res.render("new.ejs");
 });
 
-//Save book
-app.post("/save-book", async(req,res) => {
-    const { name, author, coverId } = req.body;
+app.post("/save-book", async(req,res) => {   
     try {
-        const data = await db.query('INSERT INTO books (name, author, cover_id) VALUES ($1, $2, $3)',[name, author, coverId] );
-        res.redirect('/');
+        const {isbn, title, author, review, rating} = req.body;
+        const booksResult = await db.query(
+            "INSERT INTO books (title, author, isbn) VALUES ($1, $2, $3) RETURNING id",[title, author, isbn]
+        );
+        const bookId = booksResult.rows[0].id;
+        await db.query(
+            "INSERT INTO reviews (book_id, rating, review) VALUES ($1, $2, $3)", [bookId, rating, review]
+        );
+        res.redirect("/");
     } catch (error) {
         res.status(500).json({ error: 'Error saving book data' });
     }
 });
 
-//Route for search button
+//Search for books through openLibrary
 app.post("/search", async(req,res) => {
     res.redirect("/");
 });
 
-//Edit review
+//Edit Existing books
 
-//Delete book
+//Delete books
+app.delete("/delete/:id", async(req,res) => {
+    const id = req.params.id;
+    try {
+        await db.query("DELETE FROM reviews WHERE book_id = $1", [id]);
+        await db.query("DELETE FROM books WHERE id = $1", [id]);
+        res.redirect("/");
+    } catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }    
+});
 
 
 app.listen(port, async() => {

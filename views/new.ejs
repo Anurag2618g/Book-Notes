@@ -6,8 +6,12 @@
       <h2>Add a New Book</h2>
       <form action="/save-book" method="post">
         <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" name="name" required>
+          <label for="isbn" class="form-label">ISBN</label>
+          <input type="text" class="form-control" id="isbn" name="isbn" required>
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="mb-3">
           <label for="author" class="form-label">Author</label>
@@ -18,14 +22,21 @@
           <textarea class="form-control" id="review" name="review" rows="3" required></textarea>
         </div>
         <div class="mb-3">
-          <label for="coverId" class="form-label">Cover id</label>
-          <input type="id" class="form-control" id="coverId" name="coverId" required>
-        </div>
-        <div class="mb-3">
           <label for="rating" class="form-label">Rating</label>
-          <input type="rating" class="form-control" id="rating" name="rating" required>
-        </div>       
-        <button type="submit" class="btn btn-primary">Save Book</button>
+          <div class="star-rating">
+            <input type="radio" id="5-stars" name="rating" value="5" required />
+            <label for="5-stars" class="star">&#9733;</label>
+            <input type="radio" id="4-stars" name="rating" value="4" />
+            <label for="4-stars" class="star">&#9733;</label>
+            <input type="radio" id="3-stars" name="rating" value="3" />
+            <label for="3-stars" class="star">&#9733;</label>
+            <input type="radio" id="2-stars" name="rating" value="2" />
+            <label for="2-stars" class="star">&#9733;</label>
+            <input type="radio" id="1-stars" name="rating" value="1" />
+            <label for="1-stars" class="star">&#9733;</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-dark">Save</button>
       </form>
     </div>
   </div>
