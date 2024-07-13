@@ -22,7 +22,7 @@ db.connect();
 app.get("/", async(req,res) => {
     try{
         let sortBy = req.query.sort;
-        let sortQuery = "";
+        let sortQuery = " ";
 
         switch (sortBy) {
             case 'rating':
@@ -41,7 +41,6 @@ app.get("/", async(req,res) => {
         const book = data.rows;
         res.render("index.ejs", {
             books: book,
-            sortBy: sortBy,
         });
     }catch (err) {
         console.error(err);
