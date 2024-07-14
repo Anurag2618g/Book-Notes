@@ -2,6 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import methodOverride from "method-override";
+import dotenv from "dotenv";
+
+dotenv.config();
+const dbPassword = process.env.DB_PASSWORD;
 
 const app = express();
 const port = 3000;
@@ -13,7 +17,7 @@ const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "Library",
-    password: "chained_86",
+    password: dbPassword,
     port: 5432,
 });
 db.connect();
