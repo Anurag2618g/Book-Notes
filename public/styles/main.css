@@ -1,13 +1,13 @@
 .custom-footer {
-    background-color: #e5e5ca; /* Custom background color */
-    color: black; /* Text color */
-    position: fixed;
+    background-color: #e5e5ca; 
+    color: black;
+    position: sticky;
     bottom: 0;
     width: 100%;
 }
 
 .bg-gray-300 {
-    background-color: #e3e7da; /* Lighter gray */
+    background-color: #e3e7da;
 }
 
 html, body {
@@ -20,8 +20,8 @@ html, body {
 .book-cover {
     max-height: 100%;
     height: auto;
-    min-height: 400px; /* Ensures a minimum height of 400px */
-    object-fit: cover; /* Ensures the image covers the container */
+    min-height: 400px;
+    object-fit: cover;
   }
    
 /* Star Rating CSS */
@@ -49,23 +49,22 @@ html, body {
     color: #f2b600;
   }
 
-/* Custom CSS for sort dropdown */
   .sort-form {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust gap between elements */
+    gap: 10px;
   }
 
   .sort-form label {
-    margin-bottom: 0; /* Adjust margin if necessary */
-    font-size: 14px; /* Adjust font size as needed */
+    margin-bottom: 0;
+    font-size: 14px;
   }
 
   .sort-form select {
-    width: auto; /* Adjust width as needed */
-    font-size: 14px; /* Adjust font size as needed */
+    width: auto; 
+    font-size: 14px;
   }
 
   .sort-form button {
-    font-size: 14px; /* Adjust font size as needed */
+    font-size: 14px; 
   }

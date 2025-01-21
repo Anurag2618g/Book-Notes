@@ -1,0 +1,55 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container mt-5 text-center">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="display-4 text-success fw-bold">Welcome to Book Notes</h1>
+      <p class="lead text-muted mt-3">
+        Your personal space to save, review, and manage your favorite books.
+      </p>
+    </div>
+  </div>
+    <img src="/images/image.png" class="img-fluid rounded shadow-lg mt-4" alt="Bookshelf Image">
+
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <i class="bi bi-journal-bookmark-fill text-primary display-4 mb-3"></i>
+          <h5 class="card-title fw-bold">View Your Books</h5>
+          <p class="card-text">Browse your saved collection of books and reviews.</p>
+          <a href="/books" class="btn btn-outline-primary">Go to My Books</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <i class="bi bi-plus-circle-fill text-success display-4 mb-3"></i>
+          <h5 class="card-title fw-bold">Add a New Book</h5>
+          <p class="card-text">Add books to your collection and start reviewing them.</p>
+          <a href="/add-book" class="btn btn-outline-success">Add Book</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body text-center">
+          <i class="bi bi-filter-circle-fill text-warning display-4 mb-3"></i>
+          <h5 class="card-title fw-bold">Sort and Filter</h5>
+          <p class="card-text">Organize your books by rating, date, or default order.</p>
+          <a href="/books?sort=default" class="btn btn-outline-warning">Sort Books</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 text-center">
+  <h3 class="text-success fw-bold">Why Use Book Notes?</h3>
+  <p class="text-muted mt-3">
+    Keep track of your reading habits, write personalized reviews, and never forget a great book again!
+  </p>
+</div>
+
+<%- include('partials/footer.ejs') %>

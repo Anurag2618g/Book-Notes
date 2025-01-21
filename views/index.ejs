@@ -18,16 +18,27 @@
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title fw-bold"><%= book.title %></h5>
                 <p class="card-text"><strong>Author:</strong> <%= book.author %></p>
-                <p class="card-text"><strong>Review:</strong> <%= book.review %></p>
-                <p class="card-text"><strong>Rating:</strong>
-                  <% for (let i = 0; i < book.rating; i++) { %>
-                    <i class="bi bi-star-fill text-warning"></i>
-                  <% } %>
-                  <% for (let i = book.rating; i < 5; i++) { %>
-                    <i class="bi bi-star text-warning"></i>
-                  <% } %>
-                </p>
-                <p class="card-text"><strong>Saved Date:</strong> <%= book.saved_date.toDateString() %></p>
+                <% if (book.reviews.length > 0) { %>
+                  <p class="card-text"><strong>Reviews:</strong></p>
+                  <ul>
+                    <% book.reviews.forEach(review => { %>
+                      <li>
+                        <p><%= review.review %></p>
+                        <p><strong>Rating:</strong>
+                          <% for (let i = 0; i < review.rating; i++) { %>
+                            <i class="bi bi-star-fill text-warning"></i>
+                          <% } %>
+                          <% for (let i = review.rating; i < 5; i++) { %>
+                            <i class="bi bi-star text-warning"></i>
+                          <% } %>
+                        </p>
+                      </li>
+                    <% }); %>
+                  </ul>
+                <% } else { %>
+                  <p class="card-text"><strong>Reviews:</strong> No reviews available</p>
+                <% } %>
+                <p class="card-text"><strong>Saved Date:</strong> <%= new Date(book.saved_date).toDateString() %></p>
                 <div class="mt-auto">
                   <form action="/edit/<%= book.id %>" method="get" class="d-inline">
                     <button type="submit" class="btn btn-outline-dark btn-sm ms-2">Edit</button>
